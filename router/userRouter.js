@@ -12,6 +12,8 @@ userRouter.use(upload.array())
 
 userRouter.get('/', (req, res) => UserController.index(req, res))
 userRouter.post('/', (req, res) => UserController.store(req, res))
+userRouter.get('/:id', (req, res) => UserController.show(req, res))
 userRouter.put('/:id', (req, res) => UserController.update(req, res))
+userRouter.delete('/:id', (req, res) => UserController.delete(req, res))
 
 export default userRouter

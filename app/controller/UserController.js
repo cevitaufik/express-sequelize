@@ -13,6 +13,16 @@ export class UserController {
     }
   }
 
+  static async show (request, response) {
+    const user = await User.findByPk(request.params.id)
+
+    if (user) {
+      return response.status(200).send(user)
+    }
+
+    return response.status(404).send({ message: 'not found' })
+  }
+
   static async update (request, response) {
     const user = await User.findByPk(request.params.id)
 
@@ -27,5 +37,15 @@ export class UserController {
     }
 
     return response.status(404).send({ message: 'not found' })
+  }
+
+  static async delete (request, response) {
+    try {
+      return (await User.destroy({ where: { id: request.params.id } }))
+        ? response.status(200).send({ message: 'success' })
+        : response.status(404).send({ message: 'not found' })
+    } catch (error) {
+      return response.status(500).send(error.errors)
+    }
   }
 }
