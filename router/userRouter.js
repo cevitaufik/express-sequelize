@@ -1,16 +1,17 @@
 import Express from 'express'
-import User from '../app/models/User.js'
+import bodyParser from 'body-parser'
+import multer from 'multer'
+import { UserController } from '../app/controller/UserController.js'
 
 const userRouter = Express.Router()
+const upload = multer()
 
-userRouter.get('/', async (req, res) => {
-  const tes = await User.create({
-    first_name: 'Joko',
-    last_name: 'widodo',
-    email: 'email@gmail.com'
-  })
+userRouter.use(bodyParser.urlencoded({ extended: true }))
+userRouter.use(bodyParser.json())
+userRouter.use(upload.array())
 
-  res.send(tes.toJSON())
-})
+userRouter.get('/', (req, res) => UserController.index(req, res))
+userRouter.post('/', (req, res) => UserController.store(req, res))
+userRouter.put('/:id', (req, res) => UserController.update(req, res))
 
 export default userRouter

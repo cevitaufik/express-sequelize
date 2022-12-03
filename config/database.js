@@ -1,16 +1,7 @@
 import Sequelize from 'sequelize'
 
-// export const sequelize = new Sequelize('sequelize', 'root', '', {
-//   host: 'localhost',
-//   dialect: 'mysql'
-// })
-
 export class Database {
   constructor () {
-    // this.sequelize = new Sequelize('sequelize', 'root', '', {
-    //   host: 'localhost',
-    //   dialect: 'mysql'
-    // })
     this.name = 'sequelize'
     this.user_name = 'root'
     this.password = ''
@@ -28,18 +19,6 @@ export class Database {
   }
 
   async auth () {
-    // const sequelize = new Sequelize('sequelize', 'root', '', {
-    //   host: 'localhost',
-    //   dialect: 'mysql'
-    // })
-
-    // try {
-    //   await this.sequelize.authenticate()
-    //   return false
-    // } catch (error) {
-    //   return false
-    // }
-
     return this.sequelize.authenticate()
       .then(
         full => {

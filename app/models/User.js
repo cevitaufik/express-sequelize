@@ -1,9 +1,5 @@
-import { Sequelize, DataTypes, Model } from 'sequelize'
-
-const sequelize = new Sequelize('sequelize', 'root', '', {
-  host: 'localhost',
-  dialect: 'mysql'
-})
+import { DataTypes, Model } from 'sequelize'
+import { Database } from '../../config/database.js'
 
 class User extends Model {
   otherPublicField
@@ -29,7 +25,7 @@ User.init({
     unique: 'user_email'
   }
 }, {
-  sequelize,
+  sequelize: (new Database()).connection(),
   modelName: 'User',
   tableName: 'users'
   // timestamps: false
