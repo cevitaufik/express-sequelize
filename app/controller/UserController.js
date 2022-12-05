@@ -1,4 +1,5 @@
 import User from '../models/User.js'
+import { Hash } from '../services/Hash.js'
 
 export class UserController {
   static async index (request, response) {
@@ -44,6 +45,24 @@ export class UserController {
       return (await User.destroy({ where: { id: request.params.id } }))
         ? response.status(200).send({ message: 'success' })
         : response.status(404).send({ message: 'not found' })
+    } catch (error) {
+      return response.status(500).send(error.errors)
+    }
+  }
+
+  static async authenticate (request, response) {
+    try {
+      const user = await User.unscoped().findOne({
+        where: {
+          username: request.body.username
+        }
+      })
+
+      if (user && Hash.check(user.password, request.body.password)) {
+        return response.status(200).send({ message: 'success' })
+      }
+
+      return response.status(400).send({ message: 'username dan password tidak cocok' })
     } catch (error) {
       return response.status(500).send(error.errors)
     }

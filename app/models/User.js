@@ -1,5 +1,6 @@
 import { DataTypes, Model } from 'sequelize'
 import { Database } from '../../config/database.js'
+import { Hash } from '../services/Hash.js'
 
 class User extends Model {
   otherPublicField
@@ -11,11 +12,16 @@ User.init({
     primaryKey: true,
     autoIncrement: true
   },
-  first_name: {
+  username: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: 'user_username'
+  },
+  firstName: {
     type: DataTypes.STRING,
     allowNull: false
   },
-  last_name: {
+  lastName: {
     type: DataTypes.STRING,
     allowNull: false
   },
@@ -23,12 +29,21 @@ User.init({
     type: DataTypes.STRING,
     allowNull: false,
     unique: 'user_email'
+  },
+  password: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+    set (value) {
+      this.setDataValue('password', Hash.make(value, this.username.length))
+    }
   }
 }, {
   sequelize: (new Database()).connection(),
   modelName: 'User',
-  tableName: 'users'
-  // timestamps: false
+  tableName: 'users',
+  defaultScope: {
+    attributes: { exclude: ['password'] }
+  }
 })
 
 export default User

@@ -14,7 +14,8 @@ export class Database {
   connection () {
     return new Sequelize(this.name, this.user_name, this.password, {
       host: this.host,
-      dialect: this.dialect
+      dialect: this.dialect,
+      logging: false
     })
   }
 

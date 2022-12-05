@@ -34,7 +34,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"first_name\": \"tonny\",\r\n    \"last_name\": \"stark\",\r\n    \"email\": \"tonny@stark.com\"\r\n}",
+					"raw": "{\r\n    \"username\": \"tonnystark2\",\r\n    \"firstName\": \"tonny\",\r\n    \"lastName\": \"stark\",\r\n    \"email\": \"tonny2@stark.com\",\r\n    \"password\": \"password\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -65,7 +65,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"first_name\": \"toma1\",\r\n    \"last_name\": \"starkk\",\r\n    \"email\": \"ton72ny3@stark.com\"\r\n}",
+					"raw": "{\r\n    \"username\": \"stark2\",\r\n    \"firstName\": \"tonny\",\r\n    \"lastName\": \"stark\",\r\n    \"email\": \"tonny@stark.com\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -73,7 +73,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/users/1",
+					"raw": "http://localhost:3000/users/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -81,7 +81,7 @@
 					"port": "3000",
 					"path": [
 						"users",
-						"1"
+						"2"
 					]
 				}
 			},
@@ -98,7 +98,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"first_name\": \"tomas\",\r\n    \"last_name\": \"starkk\",\r\n    \"email\": \"ton7ny3@stark.com\"\r\n}",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -151,6 +151,73 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "login",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"tonnystark4\",\r\n    \"password\": \"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/users/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "value",
+				"value": "RaHa51A",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "Api-Key",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		}
 	]
 }
