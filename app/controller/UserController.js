@@ -1,4 +1,4 @@
-import User from '../models/User.js'
+import User from '../models/user.js'
 import { Hash } from '../services/Hash.js'
 
 export class UserController {

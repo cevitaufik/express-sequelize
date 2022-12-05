@@ -1,18 +1,21 @@
 import Sequelize from 'sequelize'
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 export class Database {
   constructor () {
-    this.name = 'sequelize'
-    this.user_name = 'root'
-    this.password = ''
-    this.host = 'localhost'
-    this.dialect = 'mysql'
+    this.name = process.env.DB_DATABASE
+    this.username = process.env.DB_USERNAME
+    this.password = process.env.DB_PASSWORD
+    this.host = process.env.DB_HOST
+    this.dialect = process.env.DB_CONNECTION
 
     this.sequelize = this.connection()
   }
 
   connection () {
-    return new Sequelize(this.name, this.user_name, this.password, {
+    return new Sequelize(this.name, this.username, this.password, {
       host: this.host,
       dialect: this.dialect,
       logging: false

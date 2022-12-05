@@ -1,22 +1,9 @@
-'use strict'
-
+import { DataTypes, Model } from 'sequelize'
 import { Database } from '../../config/database.js'
 import { Hash } from '../services/Hash.js'
-import { DataTypes, Model } from 'sequelize'
-
-// const { Model } = require('sequelize')
 
 class User extends Model {
   otherPublicField
-
-  /**
-   * Helper method for defining associations.
-   * This method is not a part of Sequelize lifecycle.
-   * The `models/index` file will call this method automatically.
-   */
-  static associate (models) {
-    // define association here
-  }
 }
 
 User.init({
@@ -53,7 +40,6 @@ User.init({
 }, {
   sequelize: (new Database()).connection(),
   modelName: 'User',
-  freezeTableName: true,
   tableName: 'users',
   defaultScope: {
     attributes: { exclude: ['password'] }
