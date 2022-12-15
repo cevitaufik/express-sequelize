@@ -1,11 +1,6 @@
-'use strict'
-
 import { Database } from '../../config/database.js'
 import { Hash } from '../services/Hash.js'
 import { DataTypes, Model } from 'sequelize'
-
-// const { Model } = require('sequelize')
-
 class User extends Model {
   otherPublicField
 
@@ -28,7 +23,7 @@ User.init({
   username: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: 'user_username'
+    unique: true
   },
   firstName: {
     type: DataTypes.STRING,
@@ -41,7 +36,7 @@ User.init({
   email: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: 'user_email'
+    unique: true
   },
   password: {
     type: DataTypes.TEXT,

@@ -13,7 +13,7 @@ module.exports = {
       username: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: 'user_username'
+        unique: true
       },
       firstName: {
         type: Sequelize.STRING,
@@ -26,7 +26,7 @@ module.exports = {
       email: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: 'user_email'
+        unique: true
       },
       password: {
         type: Sequelize.TEXT,

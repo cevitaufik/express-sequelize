@@ -2,6 +2,7 @@ import Express from 'express'
 import userRouter from './router/userRouter.js'
 import bodyParser from 'body-parser'
 import { auth } from './app/middleware/middleware.js'
+import roleRouter from './router/roleRouter.js'
 // import User from './app/models/user.js'
 
 const app = Express()
@@ -11,6 +12,7 @@ app.use(auth)
 
 app.use(bodyParser.json())
 app.use('/users', userRouter)
+app.use('/roles', roleRouter)
 
 app.listen(port, async () => {
   // await User.sync({ force: true })

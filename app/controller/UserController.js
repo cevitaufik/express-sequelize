@@ -1,16 +1,20 @@
 import User from '../models/user.js'
 import { Hash } from '../services/Hash.js'
+import { Respose } from '../services/Response.js'
 
 export class UserController {
   static async index (request, response) {
-    return response.status(200).send(await User.findAll())
+    const users = await User.findAll()
+
+    return Respose.ok(response, users)
   }
 
   static async store (request, response) {
     try {
-      return response.status(201).send(await User.create(request.body))
+      const user = await User.create(request.body)
+      return Respose.created(response, user)
     } catch (error) {
-      return response.status(400).send(error.errors)
+      return Respose.badRequest(response, error.errors)
     }
   }
 
@@ -18,10 +22,10 @@ export class UserController {
     const user = await User.findByPk(request.params.id)
 
     if (user) {
-      return response.status(200).send(user)
+      return Respose.ok(response, user)
     }
 
-    return response.status(404).send({ message: 'not found' })
+    return Respose.notFound(response)
   }
 
   static async update (request, response) {
@@ -31,22 +35,22 @@ export class UserController {
       try {
         // eslint-disable-next-line camelcase
         const updated = await user.update(request.body)
-        return response.status(200).send(updated)
+        return Respose.ok(response, updated, 'Data has been updated')
       } catch (error) {
-        return response.status(500).send(error.errors)
+        return Respose.error(response, error.errors)
       }
     }
 
-    return response.status(404).send({ message: 'not found' })
+    return Respose.notFound(response)
   }
 
   static async delete (request, response) {
     try {
       return (await User.destroy({ where: { id: request.params.id } }))
-        ? response.status(200).send({ message: 'success' })
-        : response.status(404).send({ message: 'not found' })
+        ? Respose.ok(response, '', 'Data has been deleted')
+        : Respose.notFound(response)
     } catch (error) {
-      return response.status(500).send(error.errors)
+      return Respose.error(response, error.errors)
     }
   }
 
@@ -59,12 +63,12 @@ export class UserController {
       })
 
       if (user && Hash.check(user.password, request.body.password)) {
-        return response.status(200).send({ message: 'success' })
+        return Respose.ok(response, '', 'You are logged in')
       }
 
-      return response.status(400).send({ message: 'username dan password tidak cocok' })
+      return Respose.badRequest(response, 'username dan password tidak cocok')
     } catch (error) {
-      return response.status(500).send(error.errors)
+      return Respose.error(response, error.errors)
     }
   }
 }

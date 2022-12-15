@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon ./app.js",
+    "serve": "nodemon ./app.js",
     "migrate": "npx sequelize db:migrate",
     "seed": "npx sequelize db:seed:all"
   },
