@@ -23,8 +23,17 @@ Role.init({
   },
   ability: {
     type: DataTypes.STRING,
-    unique: 'role_ability',
-    allowNull: false
+    unique: true,
+    allowNull: false,
+    get () {
+      const rawValue = this.getDataValue('ability')
+      return rawValue
+        ? rawValue.trim()
+        : null
+    },
+    validate: {
+      isAlpha: true
+    }
   },
   createdAt: {
     allowNull: false,

@@ -1,57 +1,27 @@
 import User from '../models/user.js'
 import { Hash } from '../services/Hash.js'
 import { Respose } from '../services/Response.js'
+import { CommonController } from './CommonController.js'
 
 export class UserController {
   static async index (request, response) {
-    const users = await User.findAll()
-
-    return Respose.ok(response, users)
+    return CommonController.index(User, request, response)
   }
 
   static async store (request, response) {
-    try {
-      const user = await User.create(request.body)
-      return Respose.created(response, user)
-    } catch (error) {
-      return Respose.badRequest(response, error.errors)
-    }
+    return CommonController.store(User, request, response)
   }
 
   static async show (request, response) {
-    const user = await User.findByPk(request.params.id)
-
-    if (user) {
-      return Respose.ok(response, user)
-    }
-
-    return Respose.notFound(response)
+    return CommonController.show(User, { username: request.params.username }, response)
   }
 
   static async update (request, response) {
-    const user = await User.findByPk(request.params.id)
-
-    if (user) {
-      try {
-        // eslint-disable-next-line camelcase
-        const updated = await user.update(request.body)
-        return Respose.ok(response, updated, 'Data has been updated')
-      } catch (error) {
-        return Respose.error(response, error.errors)
-      }
-    }
-
-    return Respose.notFound(response)
+    return CommonController.update(User, { username: request.params.username }, request, response)
   }
 
   static async delete (request, response) {
-    try {
-      return (await User.destroy({ where: { id: request.params.id } }))
-        ? Respose.ok(response, '', 'Data has been deleted')
-        : Respose.notFound(response)
-    } catch (error) {
-      return Respose.error(response, error.errors)
-    }
+    return CommonController.delete(User, { username: request.params.username }, response)
   }
 
   static async authenticate (request, response) {
