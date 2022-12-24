@@ -1,6 +1,6 @@
 import User from '../models/user.js'
 import { Hash } from '../services/Hash.js'
-import { Respose } from '../services/Response.js'
+import { Response } from '../services/Response.js'
 import { CommonController } from './CommonController.js'
 
 export class UserController {
@@ -33,12 +33,12 @@ export class UserController {
       })
 
       if (user && Hash.check(user.password, request.body.password)) {
-        return Respose.ok(response, '', 'You are logged in')
+        return Response.ok(response, '', 'You are logged in')
       }
 
-      return Respose.badRequest(response, 'username dan password tidak cocok')
+      return Response.badRequest(response, 'username dan password tidak cocok')
     } catch (error) {
-      return Respose.error(response, error.errors)
+      return Response.error(response, error.errors)
     }
   }
 }

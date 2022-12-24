@@ -1,4 +1,4 @@
-export class Respose {
+export class Response {
   static ok (response, data, message = null) {
     return response
       .status(200)
@@ -31,6 +31,15 @@ export class Respose {
   static badRequest (response, message) {
     return response
       .status(400)
+      .json({
+        success: false,
+        message
+      })
+  }
+
+  static unauthorize (response, message = 'Unauthorized') {
+    return response
+      .status(401)
       .json({
         success: false,
         message

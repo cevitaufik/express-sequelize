@@ -67,6 +67,10 @@ User.init({
       isEmail: true
     }
   },
+  apiKey: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
   password: {
     type: DataTypes.TEXT,
     allowNull: false,
@@ -80,7 +84,7 @@ User.init({
   freezeTableName: true,
   tableName: 'users',
   defaultScope: {
-    attributes: { exclude: ['password'] }
+    attributes: { exclude: ['password', 'apiKey'] }
   }
 })
 

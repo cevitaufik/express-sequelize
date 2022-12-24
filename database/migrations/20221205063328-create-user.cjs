@@ -28,6 +28,10 @@ module.exports = {
         allowNull: false,
         unique: true
       },
+      apiKey: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
       password: {
         type: Sequelize.TEXT,
         allowNull: false

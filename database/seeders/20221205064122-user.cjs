@@ -18,6 +18,7 @@ module.exports = {
       firstName: 'John',
       lastName: 'Doe',
       email: 'example@example.com',
+      apiKey: 'iNiRaha51a',
       password: '$2b$11$ok4nuY4VWiR47Nx1QQenzeV7YYn0QoYxAlUoZ55pmMW2KV6VsSmh6', // password
       createdAt: new Date(),
       updatedAt: new Date()
