@@ -4,6 +4,13 @@ import { Response } from '../services/Response.js'
 
 dotenv.config()
 
+/**
+ * Midleware untuk mengecek apakah request yang masuk merupakan request
+ * dari user yang terotentikasi atau bukan.
+ *
+ * Middleware ini akan mengecek Api-Key pada header request dan mencocokannya
+ * dengan data pada database.
+ */
 export const auth = async (req, res, next) => {
   const apiKey = req.get('Api-Key')
 

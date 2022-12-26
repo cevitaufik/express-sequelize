@@ -17,7 +17,7 @@ const logger = winston.createLogger({
 })
 
 export const accessLog = (req, res, next) => {
-  logger.info({ username: req.auth.username })
+  logger.info(`${req.auth.username} - ${req.socket.remoteAddress} - ${req.method} - ${req.url}`)
 
   next()
 }
